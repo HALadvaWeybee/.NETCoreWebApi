@@ -1,4 +1,8 @@
-﻿namespace ConsoleToWebApi
+﻿
+using ConsoleToWebApi.Repository;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+
+namespace ConsoleToWebApi
 {
     public class Startup
     {
@@ -6,6 +10,10 @@
         {
             services.AddControllers();
             // services.AddTransient<CustomMiddleware1>();
+            //services.AddSingleton<IProductRespository, ProductRespository>();
+            //services.AddScoped<IProductRespository, ProductRespository>();
+            services.TryAddTransient<IProductRespository, ProductRespository>();
+            services.TryAddTransient<IProductRespository, TestRespository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
